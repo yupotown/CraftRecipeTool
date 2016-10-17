@@ -52,6 +52,11 @@ namespace CraftRecipeTool
             }
         }
 
+        /// <summary>
+        /// アイテム作成の素材の関係を表すグラフ
+        /// </summary>
+        private CraftGraph graph;
+
         private void FormMain_Load(object sender, EventArgs e)
         {
             // debug
@@ -75,16 +80,31 @@ namespace CraftRecipeTool
                 new RequiredItem(allItems["棒"], 1),
             }));
 
-            updateListToMake();
+            updateComboBoxToMake();
+            comboBoxToMake.SelectedIndex = 0;
         }
 
         /// <summary>
         /// 作れるもの一覧のコンボボックスを更新
         /// </summary>
-        private void updateListToMake()
+        private void updateComboBoxToMake()
         {
             comboBoxToMake.Items.Clear();
             comboBoxToMake.Items.AddRange(allItems.Select(kv => kv.Value).ToArray());
+        }
+
+        /// <summary>
+        /// 素材一覧のリストボックスを更新
+        /// </summary>
+        private void updateListBoxMaterial()
+        {
+            listBoxMaterial.Items.Clear();
+            if (graph == null) return;
+            foreach (var leaf in graph.GetLeaves())
+            {
+                listBoxMaterial.Items.Add(new RequiredItem(leaf.Item, leaf.Count));
+            }
+            listBoxRecipe.Items.Clear();
         }
 
         /// <summary>
@@ -96,7 +116,12 @@ namespace CraftRecipeTool
         {
             var item = (Item)comboBoxToMake.SelectedItem;
             listBoxMaterial.Items.Clear();
-            listBoxMaterial.Items.Add(new RequiredItem(item, 1));
+            if (item == null) return;
+
+            // グラフの更新
+            graph = new CraftGraph(item, 1);
+
+            updateListBoxMaterial();
         }
 
         /// <summary>
@@ -108,10 +133,28 @@ namespace CraftRecipeTool
         {
             var ri = (RequiredItem)listBoxMaterial.SelectedItem;
             listBoxRecipe.Items.Clear();
+            if (ri == null) return;
             if (allRecipes.ContainsKey(ri.Item.Name))
             {
                 listBoxRecipe.Items.AddRange(allRecipes[ri.Item.Name].ToArray());
             }
+        }
+
+        /// <summary>
+        /// レシピ一覧のリストボックスがダブルクリックされた
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void listBoxRecipe_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            var index = listBoxRecipe.IndexFromPoint(e.Location);
+            if (index == -1) return;
+            var recipe = (Recipe)listBoxRecipe.Items[index];
+
+            // グラフの更新
+            graph.ApplyRecipe(recipe);
+
+            updateListBoxMaterial();
         }
     }
 }

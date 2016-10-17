@@ -84,6 +84,7 @@
             this.listBoxRecipe.Name = "listBoxRecipe";
             this.listBoxRecipe.Size = new System.Drawing.Size(531, 100);
             this.listBoxRecipe.TabIndex = 5;
+            this.listBoxRecipe.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxRecipe_MouseDoubleClick);
             // 
             // label3
             // 

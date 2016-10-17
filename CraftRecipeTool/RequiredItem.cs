@@ -8,7 +8,7 @@ namespace CraftRecipeTool
 {
     public class RequiredItem
     {
-        public RequiredItem(Item item, int count)
+        public RequiredItem(Item item, Rational count)
         {
             Item = item;
             Count = count;
@@ -16,7 +16,7 @@ namespace CraftRecipeTool
 
         public Item Item { get; }
 
-        public int Count { get; }
+        public Rational Count { get; }
 
         public override string ToString()
         {
