@@ -22,6 +22,7 @@ namespace CraftRecipeTool
 
         public static bool operator ==(Item a, Item b)
         {
+            if ((object)a == null && (object)b == null) return true;
             if ((object)a == null || (object)b == null) return false;
             return a.Name == b.Name;
         }
