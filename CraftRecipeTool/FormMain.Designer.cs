@@ -36,6 +36,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.buttonLoadRecipe = new System.Windows.Forms.Button();
             this.buttonMakeGraph = new System.Windows.Forms.Button();
+            this.upDownCount = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownCount)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -55,7 +57,7 @@
             this.comboBoxToMake.FormattingEnabled = true;
             this.comboBoxToMake.Location = new System.Drawing.Point(81, 41);
             this.comboBoxToMake.Name = "comboBoxToMake";
-            this.comboBoxToMake.Size = new System.Drawing.Size(531, 20);
+            this.comboBoxToMake.Size = new System.Drawing.Size(476, 20);
             this.comboBoxToMake.TabIndex = 2;
             this.comboBoxToMake.SelectedIndexChanged += new System.EventHandler(this.comboBoxToMake_SelectedIndexChanged);
             // 
@@ -121,11 +123,35 @@
             this.buttonMakeGraph.UseVisualStyleBackColor = true;
             this.buttonMakeGraph.Click += new System.EventHandler(this.buttonMakeGraph_Click);
             // 
+            // upDownCount
+            // 
+            this.upDownCount.Location = new System.Drawing.Point(563, 41);
+            this.upDownCount.Maximum = new decimal(new int[] {
+            64,
+            0,
+            0,
+            0});
+            this.upDownCount.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.upDownCount.Name = "upDownCount";
+            this.upDownCount.Size = new System.Drawing.Size(48, 19);
+            this.upDownCount.TabIndex = 9;
+            this.upDownCount.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.upDownCount.ValueChanged += new System.EventHandler(this.upDownCount_ValueChanged);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(624, 441);
+            this.Controls.Add(this.upDownCount);
             this.Controls.Add(this.buttonMakeGraph);
             this.Controls.Add(this.buttonLoadRecipe);
             this.Controls.Add(this.label3);
@@ -137,6 +163,7 @@
             this.Name = "FormMain";
             this.Text = "Craft Recipe Tool";
             this.Load += new System.EventHandler(this.FormMain_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.upDownCount)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -152,6 +179,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button buttonLoadRecipe;
         private System.Windows.Forms.Button buttonMakeGraph;
+        private System.Windows.Forms.NumericUpDown upDownCount;
     }
 }
 

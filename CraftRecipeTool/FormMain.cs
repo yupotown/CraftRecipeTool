@@ -100,7 +100,7 @@ namespace CraftRecipeTool
             if (item == null) return;
 
             // グラフの更新
-            graph = new CraftGraph(item, 1);
+            graph = new CraftGraph(item, (int)upDownCount.Value);
 
             updateListBoxMaterial();
             listBoxMaterial.SelectedIndex = 0;
@@ -259,6 +259,21 @@ namespace CraftRecipeTool
                 }
 
                 writer.WriteLine("}");
+            }
+        }
+
+        /// <summary>
+        /// 作成するアイテムの個数が変更された
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void upDownCount_ValueChanged(object sender, EventArgs e)
+        {
+            if (graph != null)
+            {
+                graph.Root.Requires = (int)upDownCount.Value;
+                graph.UpdateCount();
+                updateListBoxMaterial();
             }
         }
     }
