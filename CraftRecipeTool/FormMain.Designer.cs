@@ -35,6 +35,7 @@
             this.listBoxRecipe = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
             this.buttonLoadRecipe = new System.Windows.Forms.Button();
+            this.buttonMakeGraph = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -110,11 +111,22 @@
             this.buttonLoadRecipe.UseVisualStyleBackColor = true;
             this.buttonLoadRecipe.Click += new System.EventHandler(this.buttonLoadRecipe_Click);
             // 
+            // buttonMakeGraph
+            // 
+            this.buttonMakeGraph.Location = new System.Drawing.Point(153, 13);
+            this.buttonMakeGraph.Name = "buttonMakeGraph";
+            this.buttonMakeGraph.Size = new System.Drawing.Size(75, 23);
+            this.buttonMakeGraph.TabIndex = 8;
+            this.buttonMakeGraph.Text = "グラフ出力";
+            this.buttonMakeGraph.UseVisualStyleBackColor = true;
+            this.buttonMakeGraph.Click += new System.EventHandler(this.buttonMakeGraph_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(624, 441);
+            this.Controls.Add(this.buttonMakeGraph);
             this.Controls.Add(this.buttonLoadRecipe);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.listBoxRecipe);
@@ -139,6 +151,7 @@
         private System.Windows.Forms.ListBox listBoxRecipe;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button buttonLoadRecipe;
+        private System.Windows.Forms.Button buttonMakeGraph;
     }
 }
 

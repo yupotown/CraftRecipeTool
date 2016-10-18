@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -173,6 +174,78 @@ namespace CraftRecipeTool
                     }
                 }
                 updateComboBoxToMake();
+            }
+        }
+
+        /// <summary>
+        /// グラフ生成ボタンが押された
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonMakeGraph_Click(object sender, EventArgs e)
+        {
+            if (graph == null)
+            {
+                MessageBox.Show("グラフがありません。作りたいアイテムと使用するレシピを選択してください。");
+                return;
+            }
+
+            var dialog = new SaveFileDialog()
+            {
+                FileName = string.Format("{0}.dot", graph.Root.Item),
+                Filter = "dot ファイル|*.dot|すべてのファイル|*.*",
+                FilterIndex = 0,
+            };
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                writeGraph(dialog.FileName);
+            }
+        }
+
+        private void writeGraph(string path)
+        {
+            using (var writer = new StreamWriter(path))
+            {
+                writer.WriteLine("digraph {0} {{", graph.Root.Item);
+
+                // グラフ全体
+                writer.WriteLine("\tgraph [label=\"Craft Recipe Tool\"];");
+                writer.WriteLine();
+
+                // 辺
+                var q = new Queue<CraftGraph.Node>();
+                var visited = new HashSet<CraftGraph.Node>();
+                q.Enqueue(graph.Root);
+                visited.Add(graph.Root);
+                while (q.Count != 0)
+                {
+                    var node = q.Dequeue();
+                    foreach (var edge in node.Edges)
+                    {
+                        writer.WriteLine("\t{0} -> {1} [taillabel=\"{2}\", headlabel=\"{3}\", labelfloat=false];",
+                            node.Item,
+                            edge.To.Item,
+                            node.Unit,
+                            edge.Count * node.Unit);
+                        if (!visited.Contains(edge.To))
+                        {
+                            visited.Add(edge.To);
+                            q.Enqueue(edge.To);
+                        }
+                    }
+                }
+                writer.WriteLine();
+
+                // 頂点
+                foreach (var node in visited)
+                {
+                    writer.WriteLine("{0} [fontname=\"MS UI Gothic\", shape={1}, label=\"{2}\"]",
+                        node.Item,
+                        (node == graph.Root) ? "box" : "ellipse",
+                        string.Format("{0} x {1}", node.Item, node.Requires));
+                }
+
+                writer.WriteLine("}");
             }
         }
     }
