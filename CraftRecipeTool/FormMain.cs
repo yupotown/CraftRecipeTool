@@ -102,7 +102,7 @@ namespace CraftRecipeTool
             if (graph == null) return;
             foreach (var leaf in graph.GetLeaves())
             {
-                listBoxMaterial.Items.Add(new RequiredItem(leaf.Item, leaf.Count));
+                listBoxMaterial.Items.Add(new RequiredItem(leaf.Item, leaf.Requires));
             }
             listBoxRecipe.Items.Clear();
         }
@@ -122,6 +122,7 @@ namespace CraftRecipeTool
             graph = new CraftGraph(item, 1);
 
             updateListBoxMaterial();
+            listBoxMaterial.SelectedIndex = 0;
         }
 
         /// <summary>

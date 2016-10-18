@@ -8,10 +8,10 @@ namespace CraftRecipeTool
 {
     public class CraftGraph
     {
-        public CraftGraph(Item rootItem, Rational count)
+        public CraftGraph(Item rootItem, int count)
         {
             Root = new Node(rootItem);
-            Root.Count = count;
+            Root.Requires = count;
             dicNodes.Add(rootItem, Root);
         }
 
@@ -24,7 +24,8 @@ namespace CraftRecipeTool
             {
                 Item = item;
                 Edges = new List<Edge>();
-                Count = 0;
+                Requires = 0;
+                Unit = 1;
             }
 
             /// <summary>
@@ -49,7 +50,12 @@ namespace CraftRecipeTool
             /// <summary>
             /// この頂点に対応するアイテムの必要数
             /// </summary>
-            public Rational Count { get; set; }
+            public int Requires { get; set; }
+
+            /// <summary>
+            /// この頂点に対応するアイテムを作成するレシピで一度に作られる個数
+            /// </summary>
+            public int Unit { get; set; }
         }
 
         /// <summary>
@@ -72,6 +78,7 @@ namespace CraftRecipeTool
             {
                 throw new InvalidOperationException();
             }
+            node.Unit = recipe.Count;
             foreach (var req in recipe.Requires)
             {
                 Node to;
@@ -125,26 +132,19 @@ namespace CraftRecipeTool
         /// </summary>
         public void UpdateCount()
         {
-            var visited = new HashSet<Node>();
-            var q = new Queue<Node>();
-            q.Enqueue(Root);
-            visited.Add(Root);
-            while (q.Count() != 0)
+            tsort(Root);
+            var tempCnt = new Dictionary<Node, Rational>();
+            foreach (var node in tsortRes)
             {
-                var node = q.Dequeue();
+                tempCnt.Add(node, 0);
+            }
+            tempCnt[Root] = Root.Requires;
+            foreach (var node in tsortRes)
+            {
+                node.Requires = (tempCnt[node] / node.Unit).RoundUp() * node.Unit;
                 foreach (var edge in node.Edges)
                 {
-                    var cnt = node.Count * edge.Count;
-                    if (!visited.Contains(edge.To))
-                    {
-                        edge.To.Count = cnt;
-                        q.Enqueue(edge.To);
-                        visited.Add(edge.To);
-                    }
-                    else
-                    {
-                        edge.To.Count += cnt;
-                    }
+                    tempCnt[edge.To] += node.Requires * edge.Count;
                 }
             }
         }
@@ -160,5 +160,31 @@ namespace CraftRecipeTool
         }
 
         private Dictionary<Item, Node> dicNodes = new Dictionary<Item, Node>();
+
+        /// <summary>
+        /// トポロジカルソート
+        /// </summary>
+        /// <returns></returns>
+        private void tsort(Node node)
+        {
+            if (node == Root)
+            {
+                tsortRes = new LinkedList<Node>();
+                tsortVisited = new HashSet<Node>();
+            }
+            if (tsortVisited.Contains(node))
+            {
+                return;
+            }
+            tsortVisited.Add(node);
+            foreach (var edge in node.Edges)
+            {
+                tsort(edge.To);
+            }
+            tsortRes.AddFirst(node);
+        }
+
+        private LinkedList<Node> tsortRes;
+        private HashSet<Node> tsortVisited;
     }
 }
