@@ -19,5 +19,28 @@ namespace CraftRecipeTool
         {
             return Name;
         }
+
+        public static bool operator ==(Item a, Item b)
+        {
+            if ((object)a == null || (object)b == null) return false;
+            return a.Name == b.Name;
+        }
+
+        public static bool operator !=(Item a, Item b)
+        {
+            return !(a == b);
+        }
+
+        public override bool Equals(object obj)
+        {
+            var other = obj as Item;
+            if (other == null) return false;
+            return this == other;
+        }
+
+        public override int GetHashCode()
+        {
+            return Name.GetHashCode();
+        }
     }
 }

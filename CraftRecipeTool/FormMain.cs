@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace CraftRecipeTool
 {
@@ -59,29 +60,7 @@ namespace CraftRecipeTool
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            // debug
-            addItem(new Item("原木"));
-            addItem(new Item("木材"));
-            addItem(new Item("棒"));
-            addItem(new Item("石炭"));
-            addItem(new Item("松明"));
-
-            addRecipe(new Recipe(allItems["木材"], 4, new List<RequiredItem>
-            {
-                new RequiredItem(allItems["原木"], 1),
-            }));
-            addRecipe(new Recipe(allItems["棒"], 4, new List<RequiredItem>
-            {
-                new RequiredItem(allItems["木材"], 2),
-            }));
-            addRecipe(new Recipe(allItems["松明"], 4, new List<RequiredItem>
-            {
-                new RequiredItem(allItems["石炭"], 1),
-                new RequiredItem(allItems["棒"], 1),
-            }));
-
             updateComboBoxToMake();
-            comboBoxToMake.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -156,6 +135,45 @@ namespace CraftRecipeTool
             graph.ApplyRecipe(recipe);
 
             updateListBoxMaterial();
+        }
+
+        /// <summary>
+        /// アイテム・レシピ読み込みボタンが押された
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonLoadRecipe_Click(object sender, EventArgs e)
+        {
+            var dialog = new OpenFileDialog()
+            {
+                Filter = "XML ファイル|*.xml|すべてのファイル|*.*",
+                FilterIndex = 0,
+                Title = "アイテム・レシピ読み込み",
+            };
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                var reader = new RecipesReader(dialog.FileName);
+                reader.ReadAll();
+                foreach (var item in reader.Items)
+                {
+                    if (!allItems.ContainsKey(item.Name))
+                    {
+                        allItems.Add(item.Name, item);
+                    }
+                }
+                foreach (var recipe in reader.Recipes)
+                {
+                    if (!allRecipes.ContainsKey(recipe.Target.Name))
+                    {
+                        allRecipes.Add(recipe.Target.Name, new List<Recipe>());
+                    }
+                    if (!allRecipes[recipe.Target.Name].Contains(recipe))
+                    {
+                        allRecipes[recipe.Target.Name].Add(recipe);
+                    }
+                }
+                updateComboBoxToMake();
+            }
         }
     }
 }

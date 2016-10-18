@@ -41,5 +41,35 @@ namespace CraftRecipeTool
                     Target, Count, string.Join(", ", Requires));
             }
         }
+
+        public static bool operator ==(Recipe a, Recipe b)
+        {
+            if ((object)a == null || (object)b == null) return false;
+            if (a.Target != b.Target) return false;
+            if (a.Count != b.Count) return false;
+            if (a.Requires.Count != b.Requires.Count) return false;
+            for (int i = 0; i < a.Requires.Count; i++)
+            {
+                if (a.Requires[i] != b.Requires[i]) return false;
+            }
+            return true;
+        }
+
+        public static bool operator !=(Recipe a, Recipe b)
+        {
+            return !(a == b);
+        }
+
+        public override bool Equals(object obj)
+        {
+            var other = obj as Recipe;
+            if (other == null) return false;
+            return this == other;
+        }
+
+        public override int GetHashCode()
+        {
+            return Target.GetHashCode() ^ Count.GetHashCode() ^ Requires.GetHashCode();
+        }
     }
 }

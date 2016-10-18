@@ -22,5 +22,28 @@ namespace CraftRecipeTool
         {
             return string.Format("{0}: {1}", Item, Count);
         }
+
+        public static bool operator ==(RequiredItem a, RequiredItem b)
+        {
+            if ((object)a == null || (object)b == null) return false;
+            return a.Item == b.Item && a.Count == b.Count;
+        }
+
+        public static bool operator !=(RequiredItem a, RequiredItem b)
+        {
+            return !(a == b);
+        }
+
+        public override bool Equals(object obj)
+        {
+            var other = obj as RequiredItem;
+            if (other == null) return false;
+            return this == other;
+        }
+
+        public override int GetHashCode()
+        {
+            return Item.GetHashCode() ^ Count.GetHashCode();
+        }
     }
 }
