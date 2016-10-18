@@ -23,8 +23,23 @@ namespace RecipeEditor
 
         private Dictionary<string, List<Recipe>> allRecipes = new Dictionary<string, List<Recipe>>();
 
+        private List<ComboBox> comboBoxRecipes = new List<ComboBox>();
+        private List<NumericUpDown> upDownRecipes = new List<NumericUpDown>();
+
         private void FormMain_Load(object sender, EventArgs e)
         {
+            comboBoxRecipes = new List<ComboBox>
+            {
+                comboBoxRecipe1, comboBoxRecipe2, comboBoxRecipe3,
+                comboBoxRecipe4, comboBoxRecipe5, comboBoxRecipe6,
+                comboBoxRecipe7, comboBoxRecipe8, comboBoxRecipe9,
+            };
+            upDownRecipes = new List<NumericUpDown>
+            {
+                upDownRecipe1, upDownRecipe2, upDownRecipe3,
+                upDownRecipe4, upDownRecipe5, upDownRecipe6,
+                upDownRecipe7, upDownRecipe8, upDownRecipe9,
+            };
         }
 
         private void load(string path)
@@ -62,14 +77,27 @@ namespace RecipeEditor
         private void update()
         {
             var selItem = (Item)listBoxItem.SelectedItem;
+            var selItemsRecipe = Enumerable.Range(0, 9).Select(i => (Item)comboBoxRecipes[i].SelectedItem).ToList();
             var selRecipe = (Recipe)listBoxRecipe.SelectedItem;
             listBoxItem.Items.Clear();
+            for (int i = 0; i < 9; i++)
+            {
+                comboBoxRecipes[i].Items.Clear();
+            }
             foreach (var kv in allItems)
             {
                 listBoxItem.Items.Add(kv.Value);
                 if (kv.Value == selItem)
                 {
                     listBoxItem.SelectedIndex = listBoxItem.Items.Count - 1;
+                }
+                for (int i = 0; i < 9; i++)
+                {
+                    comboBoxRecipes[i].Items.Add(kv.Value);
+                    if (kv.Value == selItemsRecipe[i])
+                    {
+                        comboBoxRecipes[i].SelectedIndex = comboBoxRecipes[i].Items.Count - 1;
+                    }
                 }
             }
             listBoxRecipe.Items.Clear();
@@ -150,12 +178,18 @@ namespace RecipeEditor
             }
             allItems.Add(name, new Item(name));
             update();
+            textBoxItemName.Clear();
             textBoxItemName.Focus();
         }
 
         private void removeItem()
         {
             var item = (Item)listBoxItem.SelectedItem;
+            if (item == null)
+            {
+                MessageBox.Show("アイテムを選択してください。");
+                return;
+            }
             if (allRecipes.SelectMany(kv => kv.Value)
                 .Any(recipe => recipe.Target == item || recipe.Requires.Any(req => req.Item == item)))
             {
@@ -180,6 +214,48 @@ namespace RecipeEditor
             {
                 addItem();
             }
+        }
+
+        private void buttonRecipeAdd_Click(object sender, EventArgs e)
+        {
+            var target = (Item)listBoxItem.SelectedItem;
+            if (target == null)
+            {
+                MessageBox.Show("作成対象のアイテムを選択してください。");
+                return;
+            }
+            var count = (int)upDownRecipeCount.Value;
+            var reqs = new List<RequiredItem>();
+            for (int i = 0; i < 9; i++)
+            {
+                var reqItem = (Item)comboBoxRecipes[i].SelectedItem;
+                var reqCount = (int)upDownRecipes[i].Value;
+                if (reqItem == null || reqCount == 0) continue;
+                reqs.Add(new RequiredItem(reqItem, reqCount));
+            }
+            if (reqs.Count == 0)
+            {
+                MessageBox.Show("素材と個数を入力してください。");
+                return;
+            }
+            if (!allRecipes.ContainsKey(target.Name))
+            {
+                allRecipes.Add(target.Name, new List<Recipe>());
+            }
+            allRecipes[target.Name].Add(new Recipe(target, count, reqs));
+            update();
+        }
+
+        private void buttonRecipeDel_Click(object sender, EventArgs e)
+        {
+            var recipe = (Recipe)listBoxRecipe.SelectedItem;
+            if (recipe == null)
+            {
+                MessageBox.Show("レシピを選択してください。");
+                return;
+            }
+            allRecipes[recipe.Target.Name].Remove(recipe);
+            update();
         }
     }
 }

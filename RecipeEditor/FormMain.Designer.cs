@@ -39,6 +39,37 @@
             this.textBoxItemName = new System.Windows.Forms.TextBox();
             this.buttonItemAdd = new System.Windows.Forms.Button();
             this.buttonItemDel = new System.Windows.Forms.Button();
+            this.buttonRecipeDel = new System.Windows.Forms.Button();
+            this.buttonRecipeAdd = new System.Windows.Forms.Button();
+            this.upDownRecipe1 = new System.Windows.Forms.NumericUpDown();
+            this.comboBoxRecipe1 = new System.Windows.Forms.ComboBox();
+            this.comboBoxRecipe2 = new System.Windows.Forms.ComboBox();
+            this.upDownRecipe2 = new System.Windows.Forms.NumericUpDown();
+            this.comboBoxRecipe3 = new System.Windows.Forms.ComboBox();
+            this.upDownRecipe3 = new System.Windows.Forms.NumericUpDown();
+            this.comboBoxRecipe6 = new System.Windows.Forms.ComboBox();
+            this.upDownRecipe6 = new System.Windows.Forms.NumericUpDown();
+            this.comboBoxRecipe5 = new System.Windows.Forms.ComboBox();
+            this.upDownRecipe5 = new System.Windows.Forms.NumericUpDown();
+            this.comboBoxRecipe4 = new System.Windows.Forms.ComboBox();
+            this.upDownRecipe4 = new System.Windows.Forms.NumericUpDown();
+            this.comboBoxRecipe9 = new System.Windows.Forms.ComboBox();
+            this.upDownRecipe9 = new System.Windows.Forms.NumericUpDown();
+            this.comboBoxRecipe8 = new System.Windows.Forms.ComboBox();
+            this.upDownRecipe8 = new System.Windows.Forms.NumericUpDown();
+            this.comboBoxRecipe7 = new System.Windows.Forms.ComboBox();
+            this.upDownRecipe7 = new System.Windows.Forms.NumericUpDown();
+            this.upDownRecipeCount = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownRecipe1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownRecipe2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownRecipe3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownRecipe6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownRecipe5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownRecipe4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownRecipe9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownRecipe8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownRecipe7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownRecipeCount)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonNew
@@ -86,7 +117,7 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.listBoxItem.FormattingEnabled = true;
             this.listBoxItem.ItemHeight = 12;
-            this.listBoxItem.Location = new System.Drawing.Point(12, 118);
+            this.listBoxItem.Location = new System.Drawing.Point(12, 115);
             this.listBoxItem.Name = "listBoxItem";
             this.listBoxItem.Size = new System.Drawing.Size(120, 304);
             this.listBoxItem.TabIndex = 4;
@@ -118,9 +149,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listBoxRecipe.FormattingEnabled = true;
             this.listBoxRecipe.ItemHeight = 12;
-            this.listBoxRecipe.Location = new System.Drawing.Point(142, 59);
+            this.listBoxRecipe.Location = new System.Drawing.Point(142, 140);
             this.listBoxRecipe.Name = "listBoxRecipe";
-            this.listBoxRecipe.Size = new System.Drawing.Size(470, 364);
+            this.listBoxRecipe.Size = new System.Drawing.Size(470, 280);
             this.listBoxRecipe.TabIndex = 7;
             // 
             // textBoxItemName
@@ -151,11 +182,263 @@
             this.buttonItemDel.UseVisualStyleBackColor = true;
             this.buttonItemDel.Click += new System.EventHandler(this.buttonItemDel_Click);
             // 
+            // buttonRecipeDel
+            // 
+            this.buttonRecipeDel.Location = new System.Drawing.Point(142, 110);
+            this.buttonRecipeDel.Name = "buttonRecipeDel";
+            this.buttonRecipeDel.Size = new System.Drawing.Size(41, 23);
+            this.buttonRecipeDel.TabIndex = 11;
+            this.buttonRecipeDel.Text = "削除";
+            this.buttonRecipeDel.UseVisualStyleBackColor = true;
+            this.buttonRecipeDel.Click += new System.EventHandler(this.buttonRecipeDel_Click);
+            // 
+            // buttonRecipeAdd
+            // 
+            this.buttonRecipeAdd.Location = new System.Drawing.Point(142, 84);
+            this.buttonRecipeAdd.Name = "buttonRecipeAdd";
+            this.buttonRecipeAdd.Size = new System.Drawing.Size(41, 23);
+            this.buttonRecipeAdd.TabIndex = 12;
+            this.buttonRecipeAdd.Text = "追加";
+            this.buttonRecipeAdd.UseVisualStyleBackColor = true;
+            this.buttonRecipeAdd.Click += new System.EventHandler(this.buttonRecipeAdd_Click);
+            // 
+            // upDownRecipe1
+            // 
+            this.upDownRecipe1.Location = new System.Drawing.Point(286, 62);
+            this.upDownRecipe1.Maximum = new decimal(new int[] {
+            64,
+            0,
+            0,
+            0});
+            this.upDownRecipe1.Name = "upDownRecipe1";
+            this.upDownRecipe1.Size = new System.Drawing.Size(33, 19);
+            this.upDownRecipe1.TabIndex = 17;
+            // 
+            // comboBoxRecipe1
+            // 
+            this.comboBoxRecipe1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxRecipe1.FormattingEnabled = true;
+            this.comboBoxRecipe1.Location = new System.Drawing.Point(189, 61);
+            this.comboBoxRecipe1.Name = "comboBoxRecipe1";
+            this.comboBoxRecipe1.Size = new System.Drawing.Size(91, 20);
+            this.comboBoxRecipe1.TabIndex = 18;
+            // 
+            // comboBoxRecipe2
+            // 
+            this.comboBoxRecipe2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxRecipe2.FormattingEnabled = true;
+            this.comboBoxRecipe2.Location = new System.Drawing.Point(325, 62);
+            this.comboBoxRecipe2.Name = "comboBoxRecipe2";
+            this.comboBoxRecipe2.Size = new System.Drawing.Size(91, 20);
+            this.comboBoxRecipe2.TabIndex = 20;
+            // 
+            // upDownRecipe2
+            // 
+            this.upDownRecipe2.Location = new System.Drawing.Point(422, 63);
+            this.upDownRecipe2.Maximum = new decimal(new int[] {
+            64,
+            0,
+            0,
+            0});
+            this.upDownRecipe2.Name = "upDownRecipe2";
+            this.upDownRecipe2.Size = new System.Drawing.Size(33, 19);
+            this.upDownRecipe2.TabIndex = 19;
+            // 
+            // comboBoxRecipe3
+            // 
+            this.comboBoxRecipe3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxRecipe3.FormattingEnabled = true;
+            this.comboBoxRecipe3.Location = new System.Drawing.Point(461, 62);
+            this.comboBoxRecipe3.Name = "comboBoxRecipe3";
+            this.comboBoxRecipe3.Size = new System.Drawing.Size(91, 20);
+            this.comboBoxRecipe3.TabIndex = 22;
+            // 
+            // upDownRecipe3
+            // 
+            this.upDownRecipe3.Location = new System.Drawing.Point(558, 63);
+            this.upDownRecipe3.Maximum = new decimal(new int[] {
+            64,
+            0,
+            0,
+            0});
+            this.upDownRecipe3.Name = "upDownRecipe3";
+            this.upDownRecipe3.Size = new System.Drawing.Size(33, 19);
+            this.upDownRecipe3.TabIndex = 21;
+            // 
+            // comboBoxRecipe6
+            // 
+            this.comboBoxRecipe6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxRecipe6.FormattingEnabled = true;
+            this.comboBoxRecipe6.Location = new System.Drawing.Point(461, 88);
+            this.comboBoxRecipe6.Name = "comboBoxRecipe6";
+            this.comboBoxRecipe6.Size = new System.Drawing.Size(91, 20);
+            this.comboBoxRecipe6.TabIndex = 28;
+            // 
+            // upDownRecipe6
+            // 
+            this.upDownRecipe6.Location = new System.Drawing.Point(558, 89);
+            this.upDownRecipe6.Maximum = new decimal(new int[] {
+            64,
+            0,
+            0,
+            0});
+            this.upDownRecipe6.Name = "upDownRecipe6";
+            this.upDownRecipe6.Size = new System.Drawing.Size(33, 19);
+            this.upDownRecipe6.TabIndex = 27;
+            // 
+            // comboBoxRecipe5
+            // 
+            this.comboBoxRecipe5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxRecipe5.FormattingEnabled = true;
+            this.comboBoxRecipe5.Location = new System.Drawing.Point(325, 88);
+            this.comboBoxRecipe5.Name = "comboBoxRecipe5";
+            this.comboBoxRecipe5.Size = new System.Drawing.Size(91, 20);
+            this.comboBoxRecipe5.TabIndex = 26;
+            // 
+            // upDownRecipe5
+            // 
+            this.upDownRecipe5.Location = new System.Drawing.Point(422, 89);
+            this.upDownRecipe5.Maximum = new decimal(new int[] {
+            64,
+            0,
+            0,
+            0});
+            this.upDownRecipe5.Name = "upDownRecipe5";
+            this.upDownRecipe5.Size = new System.Drawing.Size(33, 19);
+            this.upDownRecipe5.TabIndex = 25;
+            // 
+            // comboBoxRecipe4
+            // 
+            this.comboBoxRecipe4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxRecipe4.FormattingEnabled = true;
+            this.comboBoxRecipe4.Location = new System.Drawing.Point(189, 87);
+            this.comboBoxRecipe4.Name = "comboBoxRecipe4";
+            this.comboBoxRecipe4.Size = new System.Drawing.Size(91, 20);
+            this.comboBoxRecipe4.TabIndex = 24;
+            // 
+            // upDownRecipe4
+            // 
+            this.upDownRecipe4.Location = new System.Drawing.Point(286, 88);
+            this.upDownRecipe4.Maximum = new decimal(new int[] {
+            64,
+            0,
+            0,
+            0});
+            this.upDownRecipe4.Name = "upDownRecipe4";
+            this.upDownRecipe4.Size = new System.Drawing.Size(33, 19);
+            this.upDownRecipe4.TabIndex = 23;
+            // 
+            // comboBoxRecipe9
+            // 
+            this.comboBoxRecipe9.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxRecipe9.FormattingEnabled = true;
+            this.comboBoxRecipe9.Location = new System.Drawing.Point(461, 114);
+            this.comboBoxRecipe9.Name = "comboBoxRecipe9";
+            this.comboBoxRecipe9.Size = new System.Drawing.Size(91, 20);
+            this.comboBoxRecipe9.TabIndex = 34;
+            // 
+            // upDownRecipe9
+            // 
+            this.upDownRecipe9.Location = new System.Drawing.Point(558, 115);
+            this.upDownRecipe9.Maximum = new decimal(new int[] {
+            64,
+            0,
+            0,
+            0});
+            this.upDownRecipe9.Name = "upDownRecipe9";
+            this.upDownRecipe9.Size = new System.Drawing.Size(33, 19);
+            this.upDownRecipe9.TabIndex = 33;
+            // 
+            // comboBoxRecipe8
+            // 
+            this.comboBoxRecipe8.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxRecipe8.FormattingEnabled = true;
+            this.comboBoxRecipe8.Location = new System.Drawing.Point(325, 114);
+            this.comboBoxRecipe8.Name = "comboBoxRecipe8";
+            this.comboBoxRecipe8.Size = new System.Drawing.Size(91, 20);
+            this.comboBoxRecipe8.TabIndex = 32;
+            // 
+            // upDownRecipe8
+            // 
+            this.upDownRecipe8.Location = new System.Drawing.Point(422, 115);
+            this.upDownRecipe8.Maximum = new decimal(new int[] {
+            64,
+            0,
+            0,
+            0});
+            this.upDownRecipe8.Name = "upDownRecipe8";
+            this.upDownRecipe8.Size = new System.Drawing.Size(33, 19);
+            this.upDownRecipe8.TabIndex = 31;
+            // 
+            // comboBoxRecipe7
+            // 
+            this.comboBoxRecipe7.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxRecipe7.FormattingEnabled = true;
+            this.comboBoxRecipe7.Location = new System.Drawing.Point(189, 113);
+            this.comboBoxRecipe7.Name = "comboBoxRecipe7";
+            this.comboBoxRecipe7.Size = new System.Drawing.Size(91, 20);
+            this.comboBoxRecipe7.TabIndex = 30;
+            // 
+            // upDownRecipe7
+            // 
+            this.upDownRecipe7.Location = new System.Drawing.Point(286, 114);
+            this.upDownRecipe7.Maximum = new decimal(new int[] {
+            64,
+            0,
+            0,
+            0});
+            this.upDownRecipe7.Name = "upDownRecipe7";
+            this.upDownRecipe7.Size = new System.Drawing.Size(33, 19);
+            this.upDownRecipe7.TabIndex = 29;
+            // 
+            // upDownRecipeCount
+            // 
+            this.upDownRecipeCount.Location = new System.Drawing.Point(142, 62);
+            this.upDownRecipeCount.Maximum = new decimal(new int[] {
+            64,
+            0,
+            0,
+            0});
+            this.upDownRecipeCount.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.upDownRecipeCount.Name = "upDownRecipeCount";
+            this.upDownRecipeCount.Size = new System.Drawing.Size(41, 19);
+            this.upDownRecipeCount.TabIndex = 35;
+            this.upDownRecipeCount.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(624, 441);
+            this.Controls.Add(this.upDownRecipeCount);
+            this.Controls.Add(this.comboBoxRecipe9);
+            this.Controls.Add(this.upDownRecipe9);
+            this.Controls.Add(this.comboBoxRecipe8);
+            this.Controls.Add(this.upDownRecipe8);
+            this.Controls.Add(this.comboBoxRecipe7);
+            this.Controls.Add(this.upDownRecipe7);
+            this.Controls.Add(this.comboBoxRecipe6);
+            this.Controls.Add(this.upDownRecipe6);
+            this.Controls.Add(this.comboBoxRecipe5);
+            this.Controls.Add(this.upDownRecipe5);
+            this.Controls.Add(this.comboBoxRecipe4);
+            this.Controls.Add(this.upDownRecipe4);
+            this.Controls.Add(this.comboBoxRecipe3);
+            this.Controls.Add(this.upDownRecipe3);
+            this.Controls.Add(this.comboBoxRecipe2);
+            this.Controls.Add(this.upDownRecipe2);
+            this.Controls.Add(this.comboBoxRecipe1);
+            this.Controls.Add(this.upDownRecipe1);
+            this.Controls.Add(this.buttonRecipeAdd);
+            this.Controls.Add(this.buttonRecipeDel);
             this.Controls.Add(this.buttonItemDel);
             this.Controls.Add(this.buttonItemAdd);
             this.Controls.Add(this.textBoxItemName);
@@ -170,6 +453,16 @@
             this.Name = "FormMain";
             this.Text = "Recipe Editor";
             this.Load += new System.EventHandler(this.FormMain_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.upDownRecipe1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownRecipe2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownRecipe3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownRecipe6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownRecipe5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownRecipe4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownRecipe9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownRecipe8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownRecipe7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownRecipeCount)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -188,6 +481,27 @@
         private System.Windows.Forms.TextBox textBoxItemName;
         private System.Windows.Forms.Button buttonItemAdd;
         private System.Windows.Forms.Button buttonItemDel;
+        private System.Windows.Forms.Button buttonRecipeDel;
+        private System.Windows.Forms.Button buttonRecipeAdd;
+        private System.Windows.Forms.NumericUpDown upDownRecipe1;
+        private System.Windows.Forms.ComboBox comboBoxRecipe1;
+        private System.Windows.Forms.ComboBox comboBoxRecipe2;
+        private System.Windows.Forms.NumericUpDown upDownRecipe2;
+        private System.Windows.Forms.ComboBox comboBoxRecipe3;
+        private System.Windows.Forms.NumericUpDown upDownRecipe3;
+        private System.Windows.Forms.ComboBox comboBoxRecipe6;
+        private System.Windows.Forms.NumericUpDown upDownRecipe6;
+        private System.Windows.Forms.ComboBox comboBoxRecipe5;
+        private System.Windows.Forms.NumericUpDown upDownRecipe5;
+        private System.Windows.Forms.ComboBox comboBoxRecipe4;
+        private System.Windows.Forms.NumericUpDown upDownRecipe4;
+        private System.Windows.Forms.ComboBox comboBoxRecipe9;
+        private System.Windows.Forms.NumericUpDown upDownRecipe9;
+        private System.Windows.Forms.ComboBox comboBoxRecipe8;
+        private System.Windows.Forms.NumericUpDown upDownRecipe8;
+        private System.Windows.Forms.ComboBox comboBoxRecipe7;
+        private System.Windows.Forms.NumericUpDown upDownRecipe7;
+        private System.Windows.Forms.NumericUpDown upDownRecipeCount;
     }
 }
 
