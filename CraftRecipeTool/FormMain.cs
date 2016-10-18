@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -199,6 +200,18 @@ namespace CraftRecipeTool
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 writeGraph(dialog.FileName);
+
+                var path = Path.ChangeExtension(dialog.FileName, null);
+                try
+                {
+                    var p = Process.Start("dot", string.Format("-Tpng {0}.dot -o {0}.png", path));
+                    p.WaitForExit();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("dotファイルは保存されましたが、画像の生成に失敗しました。");
+                }
+                Process.Start(string.Format("{0}.png", path));
             }
         }
 
