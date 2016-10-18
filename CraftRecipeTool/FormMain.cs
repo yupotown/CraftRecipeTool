@@ -252,10 +252,11 @@ namespace CraftRecipeTool
                 // 頂点
                 foreach (var node in visited)
                 {
-                    writer.WriteLine("{0} [fontname=\"MS UI Gothic\", shape={1}, label=\"{2}\"]",
+                    writer.WriteLine("{0} [fontname=\"MS UI Gothic\", shape={1}, label=\"{2}\", peripheries={3}]",
                         node.Item,
                         (node == graph.Root) ? "box" : "ellipse",
-                        string.Format("{0} x {1}", node.Item, node.Requires));
+                        string.Format("{0} x {1}", node.Item, node.Requires),
+                        (node.Edges.Count == 0) ? 2 : 1);
                 }
 
                 writer.WriteLine("}");
