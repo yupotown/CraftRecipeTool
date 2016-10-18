@@ -107,24 +107,8 @@ namespace CraftRecipeTool
         public List<Node> GetLeaves()
         {
             var res = new List<Node>();
-            var q = new Queue<Node>();
-            q.Enqueue(Root);
-            while (q.Count() != 0)
-            {
-                var t = q.Dequeue();
-                if (t.Edges.Count() == 0)
-                {
-                    res.Add(t);
-                }
-                else
-                {
-                    foreach (var s in t.Edges)
-                    {
-                        q.Enqueue(s.To);
-                    }
-                }
-            }
-            return res;
+            tsort(Root);
+            return tsortRes.Where(node => node.Edges.Count == 0).ToList();
         }
 
         /// <summary>
