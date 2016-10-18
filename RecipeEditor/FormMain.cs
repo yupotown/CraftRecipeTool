@@ -243,6 +243,12 @@ namespace RecipeEditor
                 allRecipes.Add(target.Name, new List<Recipe>());
             }
             allRecipes[target.Name].Add(new Recipe(target, count, reqs));
+            upDownRecipeCount.Value = 1;
+            for (int i = 0; i < 9; i++)
+            {
+                comboBoxRecipes[i].SelectedIndex = -1;
+                upDownRecipes[i].Value = 0;
+            }
             update();
         }
 
