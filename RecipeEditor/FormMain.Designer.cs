@@ -36,6 +36,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.checkBoxSelectedOnly = new System.Windows.Forms.CheckBox();
             this.listBoxRecipe = new System.Windows.Forms.ListBox();
+            this.textBoxItemName = new System.Windows.Forms.TextBox();
+            this.buttonItemAdd = new System.Windows.Forms.Button();
+            this.buttonItemDel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonNew
@@ -83,9 +86,9 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.listBoxItem.FormattingEnabled = true;
             this.listBoxItem.ItemHeight = 12;
-            this.listBoxItem.Location = new System.Drawing.Point(12, 58);
+            this.listBoxItem.Location = new System.Drawing.Point(12, 118);
             this.listBoxItem.Name = "listBoxItem";
-            this.listBoxItem.Size = new System.Drawing.Size(120, 364);
+            this.listBoxItem.Size = new System.Drawing.Size(120, 304);
             this.listBoxItem.TabIndex = 4;
             // 
             // label2
@@ -120,11 +123,42 @@
             this.listBoxRecipe.Size = new System.Drawing.Size(470, 364);
             this.listBoxRecipe.TabIndex = 7;
             // 
+            // textBoxItemName
+            // 
+            this.textBoxItemName.Location = new System.Drawing.Point(15, 61);
+            this.textBoxItemName.Name = "textBoxItemName";
+            this.textBoxItemName.Size = new System.Drawing.Size(117, 19);
+            this.textBoxItemName.TabIndex = 8;
+            this.textBoxItemName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxItemName_KeyDown);
+            // 
+            // buttonItemAdd
+            // 
+            this.buttonItemAdd.Location = new System.Drawing.Point(15, 86);
+            this.buttonItemAdd.Name = "buttonItemAdd";
+            this.buttonItemAdd.Size = new System.Drawing.Size(64, 23);
+            this.buttonItemAdd.TabIndex = 9;
+            this.buttonItemAdd.Text = "追加";
+            this.buttonItemAdd.UseVisualStyleBackColor = true;
+            this.buttonItemAdd.Click += new System.EventHandler(this.buttonItemAdd_Click);
+            // 
+            // buttonItemDel
+            // 
+            this.buttonItemDel.Location = new System.Drawing.Point(85, 86);
+            this.buttonItemDel.Name = "buttonItemDel";
+            this.buttonItemDel.Size = new System.Drawing.Size(47, 23);
+            this.buttonItemDel.TabIndex = 10;
+            this.buttonItemDel.Text = "削除";
+            this.buttonItemDel.UseVisualStyleBackColor = true;
+            this.buttonItemDel.Click += new System.EventHandler(this.buttonItemDel_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(624, 441);
+            this.Controls.Add(this.buttonItemDel);
+            this.Controls.Add(this.buttonItemAdd);
+            this.Controls.Add(this.textBoxItemName);
             this.Controls.Add(this.listBoxRecipe);
             this.Controls.Add(this.checkBoxSelectedOnly);
             this.Controls.Add(this.label2);
@@ -151,6 +185,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox checkBoxSelectedOnly;
         private System.Windows.Forms.ListBox listBoxRecipe;
+        private System.Windows.Forms.TextBox textBoxItemName;
+        private System.Windows.Forms.Button buttonItemAdd;
+        private System.Windows.Forms.Button buttonItemDel;
     }
 }
 

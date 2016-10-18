@@ -124,5 +124,62 @@ namespace RecipeEditor
         {
             update();
         }
+
+        private void buttonItemAdd_Click(object sender, EventArgs e)
+        {
+            addItem();
+        }
+
+        private void buttonItemDel_Click(object sender, EventArgs e)
+        {
+            removeItem();
+        }
+
+        private void addItem()
+        {
+            var name = textBoxItemName.Text;
+            if (name == "")
+            {
+                MessageBox.Show("アイテム名を入力してください。");
+                return;
+            }
+            if (allItems.ContainsKey(name))
+            {
+                MessageBox.Show("そのアイテムは既に存在しています。");
+                return;
+            }
+            allItems.Add(name, new Item(name));
+            update();
+            textBoxItemName.Focus();
+        }
+
+        private void removeItem()
+        {
+            var item = (Item)listBoxItem.SelectedItem;
+            if (allRecipes.SelectMany(kv => kv.Value)
+                .Any(recipe => recipe.Target == item || recipe.Requires.Any(req => req.Item == item)))
+            {
+                var res = MessageBox.Show("関連するレシピも削除されます。よろしいですか？", "", MessageBoxButtons.YesNo);
+                if (res != DialogResult.Yes)
+                {
+                    return;
+                }
+            }
+            allRecipes.Remove(item.Name);
+            foreach (var kv in allRecipes)
+            {
+                kv.Value.RemoveAll(recipe => recipe.Requires.Any(req => req.Item == item));
+            }
+            allItems.Remove(item.Name);
+            update();
+        }
+
+        private void textBoxItemName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                addItem();
+            }
+        }
     }
 }
