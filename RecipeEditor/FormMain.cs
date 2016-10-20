@@ -19,9 +19,9 @@ namespace RecipeEditor
             InitializeComponent();
         }
 
-        private Dictionary<string, Item> allItems = new Dictionary<string, Item>();
+        private SortedDictionary<string, Item> allItems = new SortedDictionary<string, Item>();
 
-        private Dictionary<string, List<Recipe>> allRecipes = new Dictionary<string, List<Recipe>>();
+        private SortedDictionary<string, List<Recipe>> allRecipes = new SortedDictionary<string, List<Recipe>>();
 
         private List<ComboBox> comboBoxRecipes = new List<ComboBox>();
         private List<NumericUpDown> upDownRecipes = new List<NumericUpDown>();
@@ -42,6 +42,10 @@ namespace RecipeEditor
             };
         }
 
+        /// <summary>
+        /// アイテム・レシピ一覧を読み込む。
+        /// </summary>
+        /// <param name="path"></param>
         private void load(string path)
         {
             var reader = new RecipesReader(path);
@@ -55,6 +59,7 @@ namespace RecipeEditor
             }
             foreach (var recipe in reader.Recipes)
             {
+                recipe.Requires.Sort((a, b) => a.Item.Name.CompareTo(b.Item.Name));
                 if (!allRecipes.ContainsKey(recipe.Target.Name))
                 {
                     allRecipes.Add(recipe.Target.Name, new List<Recipe>());
@@ -66,6 +71,10 @@ namespace RecipeEditor
             }
         }
 
+        /// <summary>
+        /// アイテム・レシピ一覧を保存する。
+        /// </summary>
+        /// <param name="path"></param>
         private void save(string path)
         {
             var writer = new RecipesWriter(path);
@@ -74,6 +83,9 @@ namespace RecipeEditor
             writer.Write();
         }
 
+        /// <summary>
+        /// GUI を更新する。
+        /// </summary>
         private void update()
         {
             var selItem = (Item)listBoxItem.SelectedItem;
@@ -114,12 +126,22 @@ namespace RecipeEditor
             }
         }
 
+        /// <summary>
+        /// 新規ボタンが押された
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonNew_Click(object sender, EventArgs e)
         {
-            allItems = new Dictionary<string, Item>();
-            allRecipes = new Dictionary<string, List<Recipe>>();
+            allItems = new SortedDictionary<string, Item>();
+            allRecipes = new SortedDictionary<string, List<Recipe>>();
         }
 
+        /// <summary>
+        /// 開くボタンが押された
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonLoad_Click(object sender, EventArgs e)
         {
             var dialog = new OpenFileDialog()
@@ -134,6 +156,11 @@ namespace RecipeEditor
             }
         }
 
+        /// <summary>
+        /// 保存ボタンが押された
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonSave_Click(object sender, EventArgs e)
         {
             var dialog = new SaveFileDialog()
@@ -148,21 +175,39 @@ namespace RecipeEditor
             }
         }
 
+        /// <summary>
+        /// レシピ一覧の選択中のアイテムのみのチェックボックスが変更された
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void checkBoxSelectedOnly_CheckedChanged(object sender, EventArgs e)
         {
             update();
         }
 
+        /// <summary>
+        /// アイテムの追加ボタンが押された
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonItemAdd_Click(object sender, EventArgs e)
         {
             addItem();
         }
 
+        /// <summary>
+        /// アイテムの削除ボタンが押された
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonItemDel_Click(object sender, EventArgs e)
         {
             removeItem();
         }
 
+        /// <summary>
+        /// アイテムを追加する。
+        /// </summary>
         private void addItem()
         {
             var name = textBoxItemName.Text;
@@ -182,6 +227,9 @@ namespace RecipeEditor
             textBoxItemName.Focus();
         }
 
+        /// <summary>
+        /// 選択中のアイテムを削除する。
+        /// </summary>
         private void removeItem()
         {
             var item = (Item)listBoxItem.SelectedItem;
@@ -208,6 +256,11 @@ namespace RecipeEditor
             update();
         }
 
+        /// <summary>
+        /// アイテムの名前欄でエンターキーが押された
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void textBoxItemName_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -216,6 +269,11 @@ namespace RecipeEditor
             }
         }
 
+        /// <summary>
+        /// レシピの追加ボタンが押された
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonRecipeAdd_Click(object sender, EventArgs e)
         {
             var target = (Item)listBoxItem.SelectedItem;
@@ -242,6 +300,7 @@ namespace RecipeEditor
             {
                 allRecipes.Add(target.Name, new List<Recipe>());
             }
+            reqs.Sort((a, b) => a.Item.Name.CompareTo(b.Item.Name));
             allRecipes[target.Name].Add(new Recipe(target, count, reqs));
             upDownRecipeCount.Value = 1;
             for (int i = 0; i < 9; i++)
@@ -252,6 +311,11 @@ namespace RecipeEditor
             update();
         }
 
+        /// <summary>
+        /// レシピの削除ボタンが押された
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonRecipeDel_Click(object sender, EventArgs e)
         {
             var recipe = (Recipe)listBoxRecipe.SelectedItem;
