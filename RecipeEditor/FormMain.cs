@@ -127,6 +127,19 @@ namespace RecipeEditor
         }
 
         /// <summary>
+        /// レシピの入力欄を初期化する。
+        /// </summary>
+        private void resetRecipeInput()
+        {
+            upDownRecipeCount.Value = 1;
+            for (int i = 0; i < 9; i++)
+            {
+                upDownRecipes[i].Value = 0;
+                comboBoxRecipes[i].SelectedIndex = -1;
+            }
+        }
+
+        /// <summary>
         /// 新規ボタンが押された
         /// </summary>
         /// <param name="sender"></param>
@@ -135,6 +148,8 @@ namespace RecipeEditor
         {
             allItems = new SortedDictionary<string, Item>();
             allRecipes = new SortedDictionary<string, List<Recipe>>();
+            resetRecipeInput();
+            update();
         }
 
         /// <summary>
@@ -308,6 +323,7 @@ namespace RecipeEditor
                 comboBoxRecipes[i].SelectedIndex = -1;
                 upDownRecipes[i].Value = 0;
             }
+            resetRecipeInput();
             update();
         }
 
