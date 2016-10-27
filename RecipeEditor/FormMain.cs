@@ -50,13 +50,12 @@ namespace RecipeEditor
         {
             var reader = new RecipesReader(path);
             reader.ReadAll();
+            allItems.Clear();
             foreach (var item in reader.Items)
             {
-                if (!allItems.ContainsKey(item.Name))
-                {
-                    allItems.Add(item.Name, item);
-                }
+                allItems.Add(item.Name, item);
             }
+            allRecipes.Clear();
             foreach (var recipe in reader.Recipes)
             {
                 recipe.Requires.Sort((a, b) => a.Item.Name.CompareTo(b.Item.Name));
@@ -64,11 +63,9 @@ namespace RecipeEditor
                 {
                     allRecipes.Add(recipe.Target.Name, new List<Recipe>());
                 }
-                if (!allRecipes[recipe.Target.Name].Contains(recipe))
-                {
-                    allRecipes[recipe.Target.Name].Add(recipe);
-                }
+                allRecipes[recipe.Target.Name].Add(recipe);
             }
+            update();
         }
 
         /// <summary>
