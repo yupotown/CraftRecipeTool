@@ -25,6 +25,7 @@ namespace CraftRecipeTool
                 Item = item;
                 Edges = new List<Edge>();
                 Requires = 0;
+                Count = 0;
                 Unit = 1;
             }
 
@@ -50,7 +51,12 @@ namespace CraftRecipeTool
             /// <summary>
             /// この頂点に対応するアイテムの必要数
             /// </summary>
-            public int Requires { get; set; }
+            public Rational Requires { get; set; }
+
+            /// <summary>
+            /// この頂点に対応するアイテムの作成数
+            /// </summary>
+            public int Count { get; set; }
 
             /// <summary>
             /// この頂点に対応するアイテムを作成するレシピで一度に作られる個数
@@ -117,18 +123,20 @@ namespace CraftRecipeTool
         public void UpdateCount()
         {
             tsort(Root);
-            var tempCnt = new Dictionary<Node, Rational>();
             foreach (var node in tsortRes)
             {
-                tempCnt.Add(node, 0);
+                if (node != Root)
+                {
+                    node.Requires = 0;
+                }
             }
-            tempCnt[Root] = Root.Requires;
             foreach (var node in tsortRes)
             {
-                node.Requires = (tempCnt[node] / node.Unit).RoundUp() * node.Unit;
+                node.Count = (node.Requires / node.Unit).RoundUp() * node.Unit;
+                node.Requires = node.Requires.RoundUp();
                 foreach (var edge in node.Edges)
                 {
-                    tempCnt[edge.To] += node.Requires * edge.Count;
+                    edge.To.Requires += node.Count * edge.Count;
                 }
             }
         }
